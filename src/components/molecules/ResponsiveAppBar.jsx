@@ -82,12 +82,22 @@ const ResponsiveAppBar = () => {
                             justifyContent: 'space-evenly',
                         }}
                     >
-                        <HomeIcon />
-                        <SendIcon />
-                        <AddCircleOutlineIcon />
-                        <ExploreIcon />
-                        <FavoriteBorderIcon />
-                        <IconButton onClick={handleOpenSettings} sx={{ p: 0 }}>
+                        <IconButton>
+                            <HomeIcon />
+                        </IconButton>
+                        <IconButton>
+                            <SendIcon />
+                        </IconButton>
+                        <IconButton>
+                            <AddCircleOutlineIcon />
+                        </IconButton>
+                        <IconButton>
+                            <ExploreIcon />
+                        </IconButton>
+                        <IconButton>
+                            <FavoriteBorderIcon />
+                        </IconButton>
+                        <IconButton onClick={handleOpenSettings}>
                             <Avatar alt='Daniel Cho' src='/static/images/avatar/2.jpg' />
                         </IconButton>
 
