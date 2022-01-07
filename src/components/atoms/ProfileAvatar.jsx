@@ -15,14 +15,14 @@ const useStyles = makeStyles({
 });
 
 const ProfileAvatar = (props) => {
-    const { user } = props;
+    const { user, isHideUserName } = props;
     const classes = useStyles();
     const navigate = useNavigate();
 
     return (
         <IconButton className={classes.iconButton} onClick={() => navigate(`/${user.userName}`)}>
             <Avatar alt={user.userName} src={user.image} />
-            <span className={classes.name}>{user.userName}</span>
+            {isHideUserName ? null : <span className={classes.name}>{user.userName}</span>}
         </IconButton>
     );
 };

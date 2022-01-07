@@ -10,10 +10,9 @@ function App() {
             <div className='App'>
                 <AppBarContainer />
                 <Routes>
-                    <Route path='/' element={<LandingPage />} />
-                </Routes>
-                <Routes>
-                    <Route path='/:userName' element={<LandingPage />} />
+                    <Route path='/' element={<LandingPage />}>
+                        <Route path=':userName' element={<LandingPage />} />
+                    </Route>
                 </Routes>
             </div>
         </UserContextProvider>

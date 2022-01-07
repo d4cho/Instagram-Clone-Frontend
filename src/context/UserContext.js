@@ -7,6 +7,12 @@ export const useUserContext = () => {
 };
 
 export const UserContextProvider = ({ children }) => {
+    const [loggedInUser, setLoggedInUser] = useState({
+        image: 'www.test.ca',
+        name: 'Daniel Cho',
+        userId: 123,
+        userName: 'd4cho',
+    });
     const [users, setUsers] = useState([]);
 
     const getAllUsers = () => {
@@ -18,7 +24,9 @@ export const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ users, setUsers, getAllUsers }}>
+        <UserContext.Provider
+            value={{ loggedInUser, setLoggedInUser, users, setUsers, getAllUsers }}
+        >
             {children}
         </UserContext.Provider>
     );

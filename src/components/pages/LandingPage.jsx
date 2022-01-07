@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import UsersListContainer from '../organisms/UsersListContainer';
+import LoggedInUserContainer from '../organisms/LoggedInUserContainer';
 
 const LandingPage = () => {
     return (
@@ -11,7 +12,7 @@ const LandingPage = () => {
                     <div>left bottom</div>
                 </Grid>
                 <Grid item xs={4}>
-                    <div>right</div>
+                    <LoggedInUserContainer />
                 </Grid>
             </Grid>
         </div>
