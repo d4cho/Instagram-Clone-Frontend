@@ -1,25 +1,8 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
-import { useUserContext } from '../../context/UserContext';
+import React from 'react';
 import ProfileAvatar from '../atoms/ProfileAvatar';
 
-const useStyles = makeStyles({
-    name: {
-        fontSize: '12px',
-    },
-    iconButton: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-});
-
-const UsersList = () => {
-    const { users, getAllUsers } = useUserContext();
-    console.log(users);
-
-    useEffect(() => {
-        getAllUsers();
-    }, []);
+const UsersList = (props) => {
+    const { users } = props;
 
     return (
         <>

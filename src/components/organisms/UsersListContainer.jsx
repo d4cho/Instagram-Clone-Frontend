@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import UsersList from '../molecules/UsersList';
+import { useUserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
     root: {
@@ -14,10 +15,16 @@ const useStyles = makeStyles({
 
 const UsersListContainer = () => {
     const classes = useStyles();
+    const { users, getAllUsers } = useUserContext();
+    console.log(users);
+
+    useEffect(() => {
+        getAllUsers();
+    }, []);
 
     return (
         <div className={classes.root}>
-            <UsersList />
+            <UsersList users={users} />
         </div>
     );
 };
