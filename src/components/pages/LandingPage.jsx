@@ -6,7 +6,7 @@ import AllPostsContainer from '../organisms/AllPostsContainer';
 
 const LandingPage = () => {
     return (
-        <div style={{ border: '1px solid red', paddingTop: '20px', margin: '0 15vw 0 15vw' }}>
+        <div style={{ border: '1px solid red', paddingTop: '20px', margin: '60px 15vw 0 15vw' }}>
             <Grid container spacing={2}>
                 <Grid item xs={8}>
                     <UsersListContainer />

@@ -31,8 +31,8 @@ const ResponsiveAppBar = () => {
 
     return (
         <AppBar
-            color='transparent'
-            position='static'
+            color='inherit'
+            position='fixed'
             style={{
                 height: '60px',
                 display: 'flex',
