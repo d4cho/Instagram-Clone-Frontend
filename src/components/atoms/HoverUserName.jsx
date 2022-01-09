@@ -9,6 +9,7 @@ const useStyles = makeStyles({
         },
         fontSize: '14px',
         color: '#262626',
+        fontWeight: 'bold',
     },
 });
 

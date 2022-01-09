@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import HoverUserName from '../atoms/HoverUserName';
 import LikeCommentMessage from '../atoms/LikeCommentMessage';
+import Comments from '../atoms/Comments';
 
 const useStyles = makeStyles({
     topPart: {
@@ -49,7 +50,11 @@ const LandingPost = (props) => {
 
             <div className={classes.likes}>{post.likeCount} likes</div>
 
-            <div>comments</div>
+            <Comments
+                userName={post.userName}
+                postDesc={post.postdesc}
+                fullComments={post.fullComments}
+            />
             <div>input comments</div>
         </div>
     );
