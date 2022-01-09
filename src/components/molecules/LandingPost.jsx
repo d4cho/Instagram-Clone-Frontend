@@ -5,6 +5,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import HoverUserName from '../atoms/HoverUserName';
 import LikeCommentMessage from '../atoms/LikeCommentMessage';
 import Comments from '../atoms/Comments';
+import CommentInput from '../atoms/CommentInput';
 
 const useStyles = makeStyles({
     topPart: {
@@ -55,7 +56,7 @@ const LandingPost = (props) => {
                 postDesc={post.postdesc}
                 fullComments={post.fullComments}
             />
-            <div>input comments</div>
+            <CommentInput />
         </div>
     );
 };
