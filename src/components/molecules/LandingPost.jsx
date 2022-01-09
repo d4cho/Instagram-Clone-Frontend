@@ -19,6 +19,11 @@ const useStyles = makeStyles({
     more: {
         cursor: 'pointer',
     },
+    likes: {
+        fontSize: '14px',
+        fontWeight: 'bold',
+        paddingLeft: '20px',
+    },
 });
 
 const LandingPost = (props) => {
@@ -41,6 +46,8 @@ const LandingPost = (props) => {
             <div>{post.image}</div>
 
             <LikeCommentMessage />
+
+            <div className={classes.likes}>{post.likeCount} likes</div>
 
             <div>comments</div>
             <div>input comments</div>
