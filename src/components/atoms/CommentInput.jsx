@@ -30,20 +30,9 @@ const useStyles = makeStyles({
     },
 });
 
-const CommentInput = () => {
+const CommentInput = (props) => {
+    const { text, setText, handleSubmitComment } = props;
     const classes = useStyles();
-    const [text, setText] = useState('');
-
-    const handlePostClick = () => {
-        setText('');
-    };
-
-    const handleEnter = (e) => {
-        console.log(e);
-        if (e.key === 'Enter') {
-            setText('');
-        }
-    };
 
     return (
         <div className={classes.root}>
@@ -65,11 +54,11 @@ const CommentInput = () => {
                 }}
                 onChange={(e) => setText(e.target.value)}
                 value={text}
-                onKeyDown={(e) => handleEnter(e)}
+                onKeyDown={(e) => handleSubmitComment(e)}
             />
             <div
                 className={text ? classes.filledText : classes.emptyText}
-                onClick={handlePostClick}
+                onClick={(e) => handleSubmitComment(e)}
             >
                 Post
             </div>

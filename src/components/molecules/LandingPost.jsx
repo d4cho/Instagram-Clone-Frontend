@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProfileAvatar from '../atoms/ProfileAvatar';
 import { makeStyles } from '@mui/styles';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -6,6 +6,8 @@ import HoverUserName from '../atoms/HoverUserName';
 import LikeCommentMessage from '../atoms/LikeCommentMessage';
 import Comments from '../atoms/Comments';
 import CommentInput from '../atoms/CommentInput';
+import { useUserContext } from '../../context/UserContext';
+import { usePostContext } from '../../context/PostContext';
 
 const useStyles = makeStyles({
     topPart: {
@@ -29,11 +31,41 @@ const useStyles = makeStyles({
 });
 
 const LandingPost = (props) => {
+    const { loggedInUser } = useUserContext();
+    const { getAllPosts } = usePostContext();
     const classes = useStyles();
     const { post } = props;
     const user = {
         image: post.profileImage,
         userName: post.userName,
+    };
+    const [text, setText] = useState('');
+
+    const handleSubmitComment = (e) => {
+        const data = {
+            userId: loggedInUser.userId,
+            postId: post.postId,
+            commentText: text,
+            likeCount: 5,
+        };
+
+        if (e.key === 'Enter' || e.type === 'click') {
+            setText('');
+
+            fetch('http://localhost:8083/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then((res) => res.json())
+                .then((resData) => {
+                    console.log(resData);
+                    setText('');
+                    getAllPosts();
+                });
+        }
     };
 
     return (
@@ -56,7 +88,7 @@ const LandingPost = (props) => {
                 postDesc={post.postdesc}
                 fullComments={post.fullComments}
             />
-            <CommentInput />
+            <CommentInput text={text} setText={setText} handleSubmitComment={handleSubmitComment} />
         </div>
     );
 };

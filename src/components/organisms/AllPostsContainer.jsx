@@ -24,7 +24,7 @@ const AllPostsContainer = () => {
 
     console.log('all posts', allPosts);
 
-    return allPosts.map((post) => (
+    return allPosts.reverse().map((post) => (
         <div key={post.postId} className={classes.root}>
             <LandingPost post={post} />
         </div>

@@ -8,10 +8,10 @@ export const useUserContext = () => {
 
 export const UserContextProvider = ({ children }) => {
     const [loggedInUser, setLoggedInUser] = useState({
-        image: 'www.test.ca',
-        name: 'Daniel Cho',
-        userId: 123,
+        userId: 2,
         userName: 'd4cho',
+        name: 'dan cho',
+        image: 'www.test.ca',
     });
     const [users, setUsers] = useState([]);
 
