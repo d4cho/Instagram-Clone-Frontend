@@ -38,6 +38,13 @@ const CommentInput = () => {
         setText('');
     };
 
+    const handleEnter = (e) => {
+        console.log(e);
+        if (e.key === 'Enter') {
+            setText('');
+        }
+    };
+
     return (
         <div className={classes.root}>
             <TextField
@@ -58,6 +65,7 @@ const CommentInput = () => {
                 }}
                 onChange={(e) => setText(e.target.value)}
                 value={text}
+                onKeyDown={(e) => handleEnter(e)}
             />
             <div
                 className={text ? classes.filledText : classes.emptyText}
