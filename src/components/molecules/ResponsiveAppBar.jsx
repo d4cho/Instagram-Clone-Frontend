@@ -15,11 +15,25 @@ import SendIcon from '@mui/icons-material/Send';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ExploreIcon from '@mui/icons-material/Explore';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Popover from '@mui/material/Popover';
+import { makeStyles } from '@mui/styles';
+import SearchedUser from '../molecules/SearchedUser';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
+const useStyles = makeStyles({
+    searchResults: {
+        width: '375px',
+    },
+});
 
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
+    const classes = useStyles();
     const [anchorElSettings, setAnchorElSettings] = useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [searchVal, setSearchVal] = useState('');
+    const [usersFromSearch, setUsersFromSearch] = useState([]);
 
     const handleOpenSettings = (event) => {
         setAnchorElSettings(event.currentTarget);
@@ -28,6 +42,25 @@ const ResponsiveAppBar = () => {
     const handleCloseSettings = () => {
         setAnchorElSettings(null);
     };
+
+    const handleSubmit = (event) => {
+        if (event.key === 'Enter') {
+            setAnchorEl(event.currentTarget);
+
+            fetch(`http://localhost:8081/users?userName=${searchVal}`)
+                .then((res) => res.json())
+                .then((resData) => {
+                    setUsersFromSearch(resData.users);
+                });
+        }
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
         <AppBar
@@ -69,9 +102,40 @@ const ResponsiveAppBar = () => {
                                         <SearchIcon />
                                     </InputAdornment>
                                 ),
+                                endAdornment: searchVal ? (
+                                    <InputAdornment position='end'>
+                                        <HighlightOffIcon
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => setSearchVal('')}
+                                        />
+                                    </InputAdornment>
+                                ) : null,
                                 style: { backgroundColor: '#EFEFEF' },
                             }}
+                            onKeyDown={(e) => handleSubmit(e)}
+                            value={searchVal}
+                            onChange={(e) => setSearchVal(e.target.value)}
                         />
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                        >
+                            <div className={classes.searchResults}>
+                                {usersFromSearch.map((user) => (
+                                    <SearchedUser key={user.userId} user={user} />
+                                ))}
+                            </div>
+                        </Popover>
                     </Box>
                 </Grid>
                 <Grid item xs={5}>
