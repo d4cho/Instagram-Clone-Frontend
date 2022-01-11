@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';

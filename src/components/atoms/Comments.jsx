@@ -11,11 +11,19 @@ const useStyles = makeStyles({
         display: 'flex',
         fontSize: '14px',
     },
+    viewAllComments: {
+        fontSize: '14px',
+        color: '#8e8e8e',
+        cursor: 'pointer',
+        padding: '5px 0',
+    },
 });
 
 const Comments = (props) => {
     const classes = useStyles();
-    const { userName, postDesc, fullComments } = props;
+    const { userName, postDesc, fullComments, isFromLandingPost } = props;
+    const numComments = fullComments.length + 1;
+    const commentsToRender = isFromLandingPost ? fullComments.slice(-2) : fullComments;
 
     return (
         <div className={classes.root}>
@@ -23,7 +31,8 @@ const Comments = (props) => {
                 <HoverUserName userName={userName} />
                 <div style={{ paddingLeft: '5px' }}>{postDesc}</div>
             </div>
-            {fullComments.map((comment) => (
+            {<div className={classes.viewAllComments}>{`View all ${numComments} comments`}</div>}
+            {commentsToRender.map((comment) => (
                 <div key={comment.commentId} className={classes.comment}>
                     <HoverUserName userName={comment.userName} />
                     <div style={{ paddingLeft: '5px' }}>{comment.commentText}</div>
