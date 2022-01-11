@@ -28,6 +28,12 @@ const useStyles = makeStyles({
         fontWeight: 'bold',
         paddingLeft: '20px',
     },
+    viewAllComments: {
+        fontSize: '14px',
+        color: '#8e8e8e',
+        padding: '10px 0 0 20px',
+        cursor: 'pointer',
+    },
 });
 
 const LandingPost = (props) => {
@@ -39,6 +45,7 @@ const LandingPost = (props) => {
         image: post.profileImage,
         userName: post.userName,
     };
+    const numComments = post.fullComments.length + 1;
     const [text, setText] = useState('');
 
     const handleSubmitComment = (e) => {
@@ -82,6 +89,8 @@ const LandingPost = (props) => {
             <LikeCommentMessage />
 
             <div className={classes.likes}>{post.likeCount} likes</div>
+
+            {<div className={classes.viewAllComments}>{`View all ${numComments} comments`}</div>}
 
             <Comments
                 userName={post.userName}
