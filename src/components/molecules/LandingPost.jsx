@@ -8,6 +8,7 @@ import Comments from '../atoms/Comments';
 import CommentInput from '../atoms/CommentInput';
 import { useUserContext } from '../../context/UserContext';
 import { usePostContext } from '../../context/PostContext';
+import testimage from '../../assets/images/img_girl.jpeg';
 
 const useStyles = makeStyles({
     topPart: {
@@ -78,7 +79,8 @@ const LandingPost = (props) => {
                 </div>
                 <MoreHorizIcon className={classes.more} />
             </div>
-            <div>{post.image}</div>
+
+            <img src={'/images/img_girl.jpeg'} alt='girl in jacket' width='100%' />
 
             <LikeCommentMessage />
 
