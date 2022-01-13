@@ -24,7 +24,6 @@ const UserPage = () => {
         fetch(`http://localhost:8082/posts/user/${userId}`)
             .then((res) => res.json())
             .then((postsData) => {
-                console.log(postsData);
                 setPosts(postsData.posts);
             });
     };
@@ -32,7 +31,6 @@ const UserPage = () => {
     return (
         <div
             style={{
-                border: '1px solid red',
                 paddingTop: '20px',
                 margin: '60px 15vw 0 15vw',
             }}

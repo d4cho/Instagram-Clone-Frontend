@@ -10,7 +10,7 @@ const UserPostsContainer = (props) => {
             {posts.length > 0 ? (
                 posts.map((post) => (
                     <Grid key={post.postId} item xs={4}>
-                        <MiniPost posts={posts} />
+                        <MiniPost post={post} />
                     </Grid>
                 ))
             ) : (

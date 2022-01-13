@@ -8,7 +8,6 @@ const LandingPage = () => {
     return (
         <div
             style={{
-                border: '1px solid red',
                 paddingTop: '20px',
                 margin: '60px 15vw 0 15vw',
                 width: '50%',

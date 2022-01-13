@@ -58,9 +58,11 @@ const UserSummaryContainer = (props) => {
                 <div>posts</div>
             </div>
             <div className={classes.images}>
-                <img src={'/images/img_girl.jpeg'} alt='girl in jacket' width='117px' />
-                <img src={'/images/img_girl.jpeg'} alt='girl in jacket' width='117px' />
-                <img src={'/images/img_girl.jpeg'} alt='girl in jacket' width='117px' />
+                {posts.map((post) => (
+                    <div key={post.postId}>
+                        <img src={'/images/img_girl.jpeg'} alt='girl in jacket' width='117px' />
+                    </div>
+                ))}
             </div>
             <div className={classes.button}>
                 <Button variant='outlined' size={'small'}>
