@@ -74,7 +74,7 @@ const LandingPost = (props) => {
             <div className={classes.topPart}>
                 <div className={classes.profileAndUserName}>
                     <ProfileAvatar user={user} isHideUserName />
-                    <HoverUserName userName={post.userName} />
+                    <HoverUserName userName={post.userName} userId={post.userId} />
                 </div>
                 <MoreHorizIcon className={classes.more} />
             </div>
@@ -86,6 +86,7 @@ const LandingPost = (props) => {
             <div className={classes.likes}>{post.likeCount} likes</div>
 
             <Comments
+                userId={post.userId}
                 userName={post.userName}
                 postDesc={post.postDesc}
                 fullComments={post.fullComments}

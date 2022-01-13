@@ -21,20 +21,20 @@ const useStyles = makeStyles({
 
 const Comments = (props) => {
     const classes = useStyles();
-    const { userName, postDesc, fullComments, isFromLandingPost } = props;
+    const { userName, postDesc, fullComments, isFromLandingPost, userId } = props;
     const numComments = fullComments.length + 1;
     const commentsToRender = isFromLandingPost ? fullComments.slice(-2) : fullComments;
 
     return (
         <div className={classes.root}>
             <div className={classes.comment}>
-                <HoverUserName userName={userName} />
+                <HoverUserName userName={userName} userId={userId} />
                 <div style={{ paddingLeft: '5px' }}>{postDesc}</div>
             </div>
             {<div className={classes.viewAllComments}>{`View all ${numComments} comments`}</div>}
             {commentsToRender.map((comment) => (
                 <div key={comment.commentId} className={classes.comment}>
-                    <HoverUserName userName={comment.userName} />
+                    <HoverUserName userName={comment.userName} userId={comment.userId} />
                     <div style={{ paddingLeft: '5px' }}>{comment.commentText}</div>
                 </div>
             ))}

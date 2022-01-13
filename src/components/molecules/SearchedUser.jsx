@@ -16,6 +16,7 @@ const useStyles = makeStyles({
         fontSize: '14px',
         color: '#262626',
         cursor: 'pointer',
+        fontWeight: 'bold',
     },
     name: {
         fontSize: '14px',
