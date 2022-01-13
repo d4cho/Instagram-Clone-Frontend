@@ -19,6 +19,7 @@ import Popover from '@mui/material/Popover';
 import { makeStyles } from '@mui/styles';
 import SearchedUser from '../molecules/SearchedUser';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
     searchResults: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
+    const navigate = useNavigate();
     const classes = useStyles();
     const [anchorElSettings, setAnchorElSettings] = useState(null);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,6 +87,8 @@ const ResponsiveAppBar = () => {
                         noWrap
                         component='div'
                         sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate('/')}
                     >
                         Instagram
                     </Typography>
@@ -146,7 +150,7 @@ const ResponsiveAppBar = () => {
                             justifyContent: 'space-evenly',
                         }}
                     >
-                        <IconButton>
+                        <IconButton onClick={() => navigate('/')}>
                             <HomeIcon />
                         </IconButton>
                         <IconButton>
