@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 const UsersListContainer = () => {
     const classes = useStyles();
     const { users, getAllUsers } = useUserContext();
-    console.log(users);
 
     useEffect(() => {
         getAllUsers();

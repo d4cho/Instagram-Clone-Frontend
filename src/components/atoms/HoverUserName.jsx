@@ -22,7 +22,6 @@ const HoverUserName = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMouseOver = (event) => {
-        console.log(userId);
         setAnchorEl(event.currentTarget);
     };
 

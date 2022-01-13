@@ -62,7 +62,6 @@ const LandingPost = (props) => {
             })
                 .then((res) => res.json())
                 .then((resData) => {
-                    console.log(resData);
                     setText('');
                     getAllPosts();
                 });

@@ -44,7 +44,6 @@ const UserSummaryContainer = (props) => {
         fetch(`http://localhost:8082/posts/user/${userId}`)
             .then((res) => res.json())
             .then((postsData) => {
-                console.log(postsData);
                 setPosts(postsData.posts);
             });
     }, [userId]);

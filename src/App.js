@@ -1,9 +1,10 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import AppBarContainer from './components/organisms/AppBarContainer';
-import LandingPage from './components/pages/LandingPage';
+import LandingPage from './components/views/LandingPage';
 import { UserContextProvider } from './context/UserContext';
 import { PostContextProvider } from './context/PostContext';
+import UserPage from './components/views/UserPage';
 
 function App() {
     return (
@@ -12,9 +13,8 @@ function App() {
                 <div className='App'>
                     <AppBarContainer />
                     <Routes>
-                        <Route path='/' element={<LandingPage />}>
-                            <Route path=':userName' element={<LandingPage />} />
-                        </Route>
+                        <Route path='/' element={<LandingPage />} />
+                        <Route path='/:userName' element={<UserPage />} />
                     </Routes>
                 </div>
             </PostContextProvider>
