@@ -90,6 +90,7 @@ const LandingPost = (props) => {
                 postDesc={post.postDesc}
                 fullComments={post.fullComments}
                 isFromLandingPost={true}
+                postId={post.postId}
             />
             <CommentInput text={text} setText={setText} handleSubmitComment={handleSubmitComment} />
         </div>

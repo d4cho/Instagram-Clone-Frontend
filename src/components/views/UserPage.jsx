@@ -4,8 +4,10 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import UserInfoContainer from '../organisms/UserInfoContainer';
 import UserPostsContainer from '../organisms/UserPostsContainer';
+import PostModalPage from './PostModalPage';
 
-const UserPage = () => {
+const UserPage = (props) => {
+    const { openModal } = props;
     const params = useParams();
     const { userName } = params;
     const [user, setUser] = useState({});
@@ -35,6 +37,7 @@ const UserPage = () => {
                 margin: '60px 15vw 0 15vw',
             }}
         >
+            {openModal ? <PostModalPage openModal={openModal} /> : null}
             <Grid container spacing={2}>
                 <Grid item xs={12} md={2}>
                     <Avatar
@@ -53,7 +56,7 @@ const UserPage = () => {
                     <div style={{ borderTop: '1px solid #dbdbdb' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <UserPostsContainer posts={posts} />
+                    <UserPostsContainer posts={posts} user={user} />
                 </Grid>
             </Grid>
         </div>

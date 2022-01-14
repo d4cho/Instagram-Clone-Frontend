@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import HoverUserName from './HoverUserName';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -20,8 +21,9 @@ const useStyles = makeStyles({
 });
 
 const Comments = (props) => {
+    const navigate = useNavigate();
     const classes = useStyles();
-    const { userName, postDesc, fullComments, isFromLandingPost, userId } = props;
+    const { userName, postDesc, fullComments, isFromLandingPost, userId, postId } = props;
     const numComments = fullComments.length + 1;
     const commentsToRender = isFromLandingPost ? fullComments.slice(-2) : fullComments;
 
@@ -31,7 +33,12 @@ const Comments = (props) => {
                 <HoverUserName userName={userName} userId={userId} />
                 <div style={{ paddingLeft: '5px' }}>{postDesc}</div>
             </div>
-            {<div className={classes.viewAllComments}>{`View all ${numComments} comments`}</div>}
+            {
+                <div
+                    className={classes.viewAllComments}
+                    onClick={() => navigate(`/p/${postId}`)}
+                >{`View all ${numComments} comments`}</div>
+            }
             {commentsToRender.map((comment) => (
                 <div key={comment.commentId} className={classes.comment}>
                     <HoverUserName userName={comment.userName} userId={comment.userId} />

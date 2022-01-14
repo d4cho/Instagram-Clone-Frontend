@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
+import { useNavigate } from 'react-router-dom';
 
 const MiniPost = (props) => {
-    const { post } = props;
+    const navigate = useNavigate();
+    const { post, user } = props;
     const [showCover, setShowCover] = useState(false);
     const [numComments, setNumComments] = useState(0);
 
@@ -40,6 +42,7 @@ const MiniPost = (props) => {
                         justifyContent: 'space-evenly',
                         cursor: 'pointer',
                     }}
+                    onClick={() => navigate(`/${user.userName}/p/${post.postId}`)}
                 >
                     <div style={{ display: 'flex', alignItem: 'center', color: 'white' }}>
                         <FavoriteIcon style={{ paddingRight: '5px' }} />

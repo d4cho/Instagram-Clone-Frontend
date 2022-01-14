@@ -14,7 +14,12 @@ function App() {
                     <AppBarContainer />
                     <Routes>
                         <Route path='/' element={<LandingPage />} />
+                        <Route path='/p/:postId' element={<LandingPage openModal={true} />} />
                         <Route path='/:userName' element={<UserPage />} />
+                        <Route
+                            path='/:userName/p/:postId'
+                            element={<UserPage openModal={true} />}
+                        />
                     </Routes>
                 </div>
             </PostContextProvider>
