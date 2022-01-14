@@ -1,31 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '80%',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 1,
 };
 
 const PostModalPage = (props) => {
     const { openModal } = props;
+    const params = useParams();
+    const { postId } = params;
     const navigate = useNavigate();
-
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(openModal);
+    const [postData, setPostData] = useState({});
 
     useEffect(() => {
-        if (openModal) {
-            setOpen(openModal);
-        }
-    }, [openModal]);
+        fetch(`http://localhost:8082/posts/${postId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setPostData(data);
+            });
+    }, [postId]);
 
     const handleClose = () => {
         setOpen(false);
@@ -39,7 +44,19 @@ const PostModalPage = (props) => {
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
         >
-            <Box sx={style}>test</Box>
+            <Box sx={style}>
+                <Grid container>
+                    <Grid item xs={8}>
+                        image
+                    </Grid>
+                    <Grid item xs={4} container direction='column'>
+                        <div>avatar bar</div>
+                        <div>comments</div>
+                        <div>comment bar</div>
+                        <div>input</div>
+                    </Grid>
+                </Grid>
+            </Box>
         </Modal>
     );
 };
