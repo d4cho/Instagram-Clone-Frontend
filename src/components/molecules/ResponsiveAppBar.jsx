@@ -20,6 +20,7 @@ import { makeStyles } from '@mui/styles';
 import SearchedUser from '../molecules/SearchedUser';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useNavigate } from 'react-router-dom';
+import { useApplicationContext } from '../../context/ApplicationContext';
 
 const useStyles = makeStyles({
     searchResults: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
+    const { setIsCreatePostModalOpen } = useApplicationContext();
     const navigate = useNavigate();
     const classes = useStyles();
     const [anchorElSettings, setAnchorElSettings] = useState(null);
@@ -157,7 +159,7 @@ const ResponsiveAppBar = () => {
                             <SendIcon />
                         </IconButton>
                         <IconButton>
-                            <AddCircleOutlineIcon />
+                            <AddCircleOutlineIcon onClick={() => setIsCreatePostModalOpen(true)} />
                         </IconButton>
                         <IconButton>
                             <ExploreIcon />

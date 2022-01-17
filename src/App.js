@@ -7,6 +7,7 @@ import { PostContextProvider } from './context/PostContext';
 import UserPage from './components/views/UserPage';
 import { ApplicationContextProvider } from './context/ApplicationContext';
 import CreateNewPost from './components/views/CreateNewPost';
+import DiscardPostModal from './components/views/DiscardPostModal';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <PostContextProvider>
                     <div className='App'>
                         <AppBarContainer />
+                        <DiscardPostModal />
                         <CreateNewPost />
                         <Routes>
                             <Route path='/' element={<LandingPage />} />
