@@ -55,6 +55,7 @@ const DiscardPostModal = () => {
         setIsDiscardPostModalOpen,
         setIsCreatePostModalOpen,
         setFiles,
+        setPostDesc,
     } = useApplicationContext();
     const classes = useStyles();
 
@@ -77,6 +78,7 @@ const DiscardPostModal = () => {
         setIsDiscardPostModalOpen(false);
         setIsCreatePostModalOpen(false);
         setFiles([]);
+        setPostDesc('');
     };
     const handleCancel = () => setIsDiscardPostModalOpen(false);
 

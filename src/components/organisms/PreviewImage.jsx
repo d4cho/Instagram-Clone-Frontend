@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import CreatePostDesc from '../molecules/CreatePostDesc';
 
 const useStyles = makeStyles({
     container: {
@@ -7,6 +8,7 @@ const useStyles = makeStyles({
         // justifyContent: 'center',
         // alignItems: 'center',
         height: 671,
+        width: '100%',
     },
 });
 
@@ -49,7 +51,7 @@ const UploadImage = (props) => {
     return (
         <div className={classes.container}>
             {thumbs}
-            <div>stuff</div>
+            <CreatePostDesc />
         </div>
     );
 };

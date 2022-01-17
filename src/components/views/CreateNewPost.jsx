@@ -34,6 +34,8 @@ const CreateNewPost = () => {
         setIsDiscardPostModalOpen,
         files,
         setFiles,
+        postDesc,
+        setPostDesc,
     } = useApplicationContext();
     const classes = useStyles();
 

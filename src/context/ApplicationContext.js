@@ -10,6 +10,7 @@ export const ApplicationContextProvider = ({ children }) => {
     const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(true);
     const [isDiscardPostModalOpen, setIsDiscardPostModalOpen] = useState(false);
     const [files, setFiles] = useState([]);
+    const [postDesc, setPostDesc] = useState('');
 
     return (
         <ApplicationContext.Provider
@@ -20,6 +21,8 @@ export const ApplicationContextProvider = ({ children }) => {
                 setIsDiscardPostModalOpen,
                 files,
                 setFiles,
+                postDesc,
+                setPostDesc,
             }}
         >
             {children}
