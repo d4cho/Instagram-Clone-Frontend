@@ -1,7 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import Button from '@mui/material/Button';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -25,11 +22,11 @@ const thumb = {
     boxSizing: 'border-box',
 };
 
-const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden',
-};
+// const thumbInner = {
+//     display: 'flex',
+//     minWidth: 0,
+//     overflow: 'hidden',
+// };
 
 const img = {
     display: 'block',
@@ -38,7 +35,7 @@ const img = {
 };
 
 const UploadImage = (props) => {
-    const { files, setFiles } = props;
+    const { files } = props;
     const classes = useStyles();
 
     const thumbs = files.map((file) => (

@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import UploadImage from '../organisms/UploadImage';
-import PreviewImage from '../organisms/PreviewImage';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useApplicationContext } from '../../context/ApplicationContext';
 import { makeStyles } from '@mui/styles';
 
