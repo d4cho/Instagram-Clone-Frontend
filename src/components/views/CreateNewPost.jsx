@@ -73,6 +73,16 @@ const CreateNewPost = () => {
             postDesc: postDesc,
         };
 
+        fetch('http://localhost:8082/posts', {
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+        }).then((res) => {
+            console.log(res);
+        });
+
         setFiles([]);
         setPostDesc('');
         setIsCreatePostModalOpen(false);

@@ -22,7 +22,7 @@ const AllPostsContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return allPosts.map((post) => (
+    return allPosts.reverse().map((post) => (
         <div key={post.postId} className={classes.root}>
             <LandingPost post={post} />
         </div>
