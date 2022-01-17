@@ -5,6 +5,7 @@ import UploadImage from '../organisms/UploadImage';
 import PreviewImage from '../organisms/PreviewImage';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useApplicationContext } from '../../context/ApplicationContext';
+import { useUserContext } from '../../context/UserContext';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -37,6 +38,7 @@ const CreateNewPost = () => {
         postDesc,
         setPostDesc,
     } = useApplicationContext();
+    const { loggedInUser } = useUserContext();
     const classes = useStyles();
 
     const style = {
@@ -64,7 +66,15 @@ const CreateNewPost = () => {
         setIsDiscardPostModalOpen(true);
     };
     const handleShareClick = () => {
+        const body = {
+            userId: loggedInUser.userId,
+            likeCount: 0,
+            image: files[0].name,
+            postDesc: postDesc,
+        };
+
         setFiles([]);
+        setPostDesc('');
         setIsCreatePostModalOpen(false);
     };
 

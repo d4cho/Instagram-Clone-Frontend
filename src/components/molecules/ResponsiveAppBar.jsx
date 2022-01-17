@@ -158,8 +158,8 @@ const ResponsiveAppBar = () => {
                         <IconButton>
                             <SendIcon />
                         </IconButton>
-                        <IconButton>
-                            <AddCircleOutlineIcon onClick={() => setIsCreatePostModalOpen(true)} />
+                        <IconButton onClick={() => setIsCreatePostModalOpen(true)}>
+                            <AddCircleOutlineIcon />
                         </IconButton>
                         <IconButton>
                             <ExploreIcon />

@@ -76,8 +76,6 @@ const UploadImage = (props) => {
         files.forEach((file) => URL.revokeObjectURL(file.preview));
     }, [files]);
 
-    console.log(files);
-
     return (
         <div className={classes.container} {...getRootProps()}>
             <input {...getInputProps()} />
