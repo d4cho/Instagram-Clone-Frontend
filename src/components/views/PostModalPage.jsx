@@ -61,6 +61,7 @@ const PostModalPage = (props) => {
 
     useEffect(() => {
         getPostByPostId();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleClose = () => {
