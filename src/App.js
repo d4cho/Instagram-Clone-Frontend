@@ -8,6 +8,7 @@ import UserPage from './components/views/UserPage';
 import { ApplicationContextProvider } from './context/ApplicationContext';
 import CreateNewPost from './components/views/CreateNewPost';
 import DiscardPostModal from './components/views/DiscardPostModal';
+import LoginPage from './components/views/LoginPage';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                         <CreateNewPost />
                         <Routes>
                             <Route path='/' element={<LandingPage />} />
+                            <Route path='/login' element={<LoginPage />} />
                             <Route path='/p/:postId' element={<LandingPage openModal={true} />} />
                             <Route path='/:userName' element={<UserPage />} />
                             <Route
