@@ -86,16 +86,17 @@ const ResponsiveAppBar = () => {
                 justifyContent={'space-evenly'}
             >
                 <Grid item xs={3}>
-                    <Typography
-                        variant='h6'
-                        noWrap
-                        component='div'
-                        sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
-                        style={{ cursor: 'pointer' }}
+                    <img
+                        src='https://iconape.com/wp-content/files/hy/369819/png/369819.png'
+                        style={{
+                            width: '120px',
+                            height: '60px',
+                            objectFit: 'cover',
+                            cursor: 'pointer',
+                        }}
+                        alt='logo'
                         onClick={() => navigate('/')}
-                    >
-                        Instagram
-                    </Typography>
+                    />
                 </Grid>
                 <Grid item xs={4}>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
