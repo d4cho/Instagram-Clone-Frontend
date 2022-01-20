@@ -21,6 +21,7 @@ import SearchedUser from '../molecules/SearchedUser';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useNavigate } from 'react-router-dom';
 import { useApplicationContext } from '../../context/ApplicationContext';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles({
     searchResults: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
+    const { logout } = useAuth0();
     const { setIsCreatePostModalOpen } = useApplicationContext();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -188,7 +190,17 @@ const ResponsiveAppBar = () => {
                             onClose={handleCloseSettings}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting}>
+                                <MenuItem
+                                    key={setting}
+                                    onClick={
+                                        setting === 'Log out'
+                                            ? () =>
+                                                  logout({
+                                                      returnTo: window.location.origin,
+                                                  })
+                                            : null
+                                    }
+                                >
                                     <Typography textAlign='center'>{setting}</Typography>
                                 </MenuItem>
                             ))}

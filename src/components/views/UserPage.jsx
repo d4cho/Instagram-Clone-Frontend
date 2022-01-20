@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import UserInfoContainer from '../organisms/UserInfoContainer';
 import UserPostsContainer from '../organisms/UserPostsContainer';
 import PostModalPage from './PostModalPage';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 const UserPage = (props) => {
     const { openModal } = props;
@@ -63,4 +64,6 @@ const UserPage = (props) => {
     );
 };
 
-export default UserPage;
+export default withAuthenticationRequired(UserPage, {
+    onRedirecting: () => <div>Loding...</div>,
+});

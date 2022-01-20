@@ -5,6 +5,7 @@ import LoggedInUserContainer from '../organisms/LoggedInUserContainer';
 import AllPostsContainer from '../organisms/AllPostsContainer';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PostModalPage from './PostModalPage';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 const LandingPage = (props) => {
     const { openModal } = props;
@@ -32,4 +33,6 @@ const LandingPage = (props) => {
     );
 };
 
-export default LandingPage;
+export default withAuthenticationRequired(LandingPage, {
+    onRedirecting: () => <div>Loding...</div>,
+});
