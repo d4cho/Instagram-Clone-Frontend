@@ -9,12 +9,8 @@ import { ApplicationContextProvider } from './context/ApplicationContext';
 import CreateNewPost from './components/views/CreateNewPost';
 import DiscardPostModal from './components/views/DiscardPostModal';
 // import LoginPage from './components/views/LoginPage';
-import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
-    const { isAuthenticated } = useAuth0();
-    console.log(isAuthenticated);
-
     return (
         <ApplicationContextProvider>
             <UserContextProvider>

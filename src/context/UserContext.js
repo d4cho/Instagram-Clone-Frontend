@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const UserContext = createContext();
 
@@ -22,6 +23,22 @@ export const UserContextProvider = ({ children }) => {
                 setUsers(userData.users);
             });
     };
+
+    const { user } = useAuth0();
+    useEffect(() => {
+        if (user) {
+            const { sub } = user;
+            const userId = sub.slice(sub.indexOf('|') + 1, sub.length);
+            const newUser = {
+                userId: userId,
+                userName: user.nickname,
+                name: user.name,
+                image: user.picture || 'www.image.ca',
+            };
+            setLoggedInUser(newUser);
+            console.log(newUser);
+        }
+    }, [user]);
 
     return (
         <UserContext.Provider
