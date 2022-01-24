@@ -22,6 +22,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useNavigate } from 'react-router-dom';
 import { useApplicationContext } from '../../context/ApplicationContext';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useUserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
     searchResults: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles({
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
+    const { loggedInUser } = useUserContext();
     const { logout } = useAuth0();
     const { setIsCreatePostModalOpen } = useApplicationContext();
     const navigate = useNavigate();
@@ -171,7 +173,10 @@ const ResponsiveAppBar = () => {
                             <FavoriteBorderIcon />
                         </IconButton>
                         <IconButton onClick={handleOpenSettings}>
-                            <Avatar alt='Daniel Cho' src='/static/images/avatar/2.jpg' />
+                            <Avatar
+                                alt={`${loggedInUser.userName}`}
+                                src={`${loggedInUser.image}`}
+                            />
                         </IconButton>
 
                         <Menu

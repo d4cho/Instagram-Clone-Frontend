@@ -47,7 +47,7 @@ const LandingPost = (props) => {
             userId: loggedInUser.userId,
             postId: post.postId,
             commentText: text,
-            likeCount: 5,
+            likeCount: 0,
         };
 
         if (e.key === 'Enter' || e.type === 'click') {
