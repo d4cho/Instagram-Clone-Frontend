@@ -10,6 +10,7 @@ import LikeCommentMessage from '../atoms/LikeCommentMessage';
 import FullComments from '../atoms/FullComments';
 import CommentInput from '../atoms/CommentInput';
 import { useUserContext } from '../../context/UserContext';
+import { usePostContext } from '../../context/PostContext';
 
 const useStyles = makeStyles({
     imgContainer: {
@@ -57,7 +58,8 @@ const PostModalPage = (props) => {
         image: postData.image,
     };
     const [text, setText] = useState('');
-    const { loggedInUser } = useUserContext();
+    const { loggedInUser, addCommentApi } = useUserContext();
+    const { getPostByPostIdApi } = usePostContext();
 
     useEffect(() => {
         getPostByPostId();
@@ -80,13 +82,7 @@ const PostModalPage = (props) => {
         if (e.key === 'Enter' || e.type === 'click') {
             setText('');
 
-            fetch('http://localhost:8083/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
+            addCommentApi(data)
                 .then((res) => res.json())
                 .then((resData) => {
                     setText('');
@@ -96,7 +92,7 @@ const PostModalPage = (props) => {
     };
 
     const getPostByPostId = () => {
-        fetch(`http://localhost:8082/posts/${postId}`)
+        getPostByPostIdApi(postId)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

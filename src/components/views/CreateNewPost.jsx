@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useApplicationContext } from '../../context/ApplicationContext';
 import { useUserContext } from '../../context/UserContext';
 import { makeStyles } from '@mui/styles';
+import { usePostContext } from '../../context/PostContext';
 
 const useStyles = makeStyles({
     title: {
@@ -39,6 +40,7 @@ const CreateNewPost = () => {
         setPostDesc,
     } = useApplicationContext();
     const { loggedInUser } = useUserContext();
+    const { addPostApi } = usePostContext();
     const classes = useStyles();
 
     const style = {
@@ -62,9 +64,11 @@ const CreateNewPost = () => {
             setIsCreatePostModalOpen(false);
         }
     };
+
     const handleBackClick = () => {
         setIsDiscardPostModalOpen(true);
     };
+
     const handleShareClick = () => {
         const body = {
             userId: loggedInUser.userId,
@@ -73,13 +77,7 @@ const CreateNewPost = () => {
             postDesc: postDesc,
         };
 
-        fetch('http://localhost:8082/posts', {
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-        }).then((res) => {
+        addPostApi(body).then((res) => {
             console.log(res);
         });
 

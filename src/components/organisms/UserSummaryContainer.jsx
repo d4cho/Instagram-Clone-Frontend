@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import SearchedUser from '../molecules/SearchedUser';
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
+import { useUserContext } from '../../context/UserContext';
+import { usePostContext } from '../../context/PostContext';
 
 const useStyles = makeStyles({
     root: {
@@ -29,23 +31,26 @@ const useStyles = makeStyles({
 });
 
 const UserSummaryContainer = (props) => {
+    const { getUserByUserIdApi } = useUserContext();
+    const { getPostByUserIdApi } = usePostContext();
     const { userId } = props;
     const classes = useStyles();
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8081/users/${userId}`)
+        getUserByUserIdApi(userId)
             .then((res) => res.json())
             .then((userData) => {
                 setUser(userData);
             });
 
-        fetch(`http://localhost:8082/posts/user/${userId}`)
+        getPostByUserIdApi(userId)
             .then((res) => res.json())
             .then((postsData) => {
                 setPosts(postsData.posts);
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
 
     return (

@@ -31,8 +31,8 @@ const useStyles = makeStyles({
 });
 
 const LandingPost = (props) => {
-    const { loggedInUser } = useUserContext();
-    const { getAllPosts } = usePostContext();
+    const { loggedInUser, addCommentApi } = useUserContext();
+    const { getAllPostsApi } = usePostContext();
     const classes = useStyles();
     const { post } = props;
     const user = {
@@ -53,17 +53,11 @@ const LandingPost = (props) => {
         if (e.key === 'Enter' || e.type === 'click') {
             setText('');
 
-            fetch('http://localhost:8083/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
+            addCommentApi(data)
                 .then((res) => res.json())
                 .then((resData) => {
                     setText('');
-                    getAllPosts();
+                    getAllPostsApi();
                 });
         }
     };

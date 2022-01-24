@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 const settings = ['Profile', 'Saved', 'Settings', 'Switch accounts', 'Log out'];
 
 const ResponsiveAppBar = () => {
-    const { loggedInUser } = useUserContext();
+    const { loggedInUser, getUserByUserNameApi } = useUserContext();
     const { logout } = useAuth0();
     const { setIsCreatePostModalOpen } = useApplicationContext();
     const navigate = useNavigate();
@@ -55,7 +55,7 @@ const ResponsiveAppBar = () => {
         if (event.key === 'Enter') {
             setAnchorEl(event.currentTarget);
 
-            fetch(`http://localhost:8081/users?userName=${searchVal}`)
+            getUserByUserNameApi(searchVal)
                 .then((res) => res.json())
                 .then((resData) => {
                     setUsersFromSearch(resData.users);

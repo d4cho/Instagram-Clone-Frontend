@@ -9,7 +9,9 @@ export const usePostContext = () => {
 export const PostContextProvider = ({ children }) => {
     const [allPosts, setAllPosts] = useState([]);
 
-    const getAllPosts = () => {
+    // APIs
+
+    const getAllPostsApi = () => {
         fetch('http://localhost:8082/posts')
             .then((res) => res.json())
             .then((posts) => {
@@ -17,8 +19,35 @@ export const PostContextProvider = ({ children }) => {
             });
     };
 
+    const getPostByPostIdApi = (postId) => {
+        return fetch(`http://localhost:8082/posts/${postId}`);
+    };
+
+    const getPostByUserIdApi = (userId) => {
+        return fetch(`http://localhost:8082/posts/user/${userId}`);
+    };
+
+    const addPostApi = (body) => {
+        return fetch('http://localhost:8082/posts', {
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+        });
+    };
+
     return (
-        <PostContext.Provider value={{ allPosts, setAllPosts, getAllPosts }}>
+        <PostContext.Provider
+            value={{
+                allPosts,
+                setAllPosts,
+                getAllPostsApi,
+                getPostByUserIdApi,
+                addPostApi,
+                getPostByPostIdApi,
+            }}
+        >
             {children}
         </PostContext.Provider>
     );

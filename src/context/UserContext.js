@@ -8,6 +8,7 @@ export const useUserContext = () => {
 };
 
 export const UserContextProvider = ({ children }) => {
+    const { user } = useAuth0();
     const [loggedInUser, setLoggedInUser] = useState({
         userId: 2,
         userName: 'd4cho',
@@ -16,15 +17,6 @@ export const UserContextProvider = ({ children }) => {
     });
     const [users, setUsers] = useState([]);
 
-    const getAllUsers = () => {
-        fetch('http://localhost:8081/users')
-            .then((res) => res.json())
-            .then((userData) => {
-                setUsers(userData.users);
-            });
-    };
-
-    const { user } = useAuth0();
     useEffect(() => {
         if (user) {
             const { sub } = user;
@@ -40,9 +32,51 @@ export const UserContextProvider = ({ children }) => {
         }
     }, [user]);
 
+    // API CALLS
+
+    const getAllUsersApi = () => {
+        fetch('http://localhost:8081/users')
+            .then((res) => res.json())
+            .then((userData) => {
+                setUsers(userData.users);
+            });
+    };
+
+    const getUserByUserNameApi = (searchVal) => {
+        return fetch(`http://localhost:8081/users?userName=${searchVal}`);
+    };
+
+    const getUserByUserIdApi = (userId) => {
+        return fetch(`http://localhost:8081/users/${userId}`);
+    };
+
+    const addCommentApi = (data) => {
+        return fetch('http://localhost:8083/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+    };
+
+    const getCommentsByPostIdApi = (postId) => {
+        return fetch(`http://localhost:8083/comments/${postId}`);
+    };
+
     return (
         <UserContext.Provider
-            value={{ loggedInUser, setLoggedInUser, users, setUsers, getAllUsers }}
+            value={{
+                loggedInUser,
+                setLoggedInUser,
+                users,
+                setUsers,
+                getAllUsersApi,
+                addCommentApi,
+                getCommentsByPostIdApi,
+                getUserByUserNameApi,
+                getUserByUserIdApi,
+            }}
         >
             {children}
         </UserContext.Provider>

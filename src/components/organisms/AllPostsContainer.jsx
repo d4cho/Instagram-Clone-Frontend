@@ -15,10 +15,10 @@ const useStyles = makeStyles({
 
 const AllPostsContainer = () => {
     const classes = useStyles();
-    const { allPosts, getAllPosts } = usePostContext();
+    const { allPosts, getAllPostsApi } = usePostContext();
 
     useEffect(() => {
-        getAllPosts();
+        getAllPostsApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

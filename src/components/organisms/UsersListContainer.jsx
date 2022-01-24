@@ -15,10 +15,10 @@ const useStyles = makeStyles({
 
 const UsersListContainer = () => {
     const classes = useStyles();
-    const { users, getAllUsers } = useUserContext();
+    const { users, getAllUsersApi } = useUserContext();
 
     useEffect(() => {
-        getAllUsers();
+        getAllUsersApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

@@ -6,6 +6,8 @@ import UserInfoContainer from '../organisms/UserInfoContainer';
 import UserPostsContainer from '../organisms/UserPostsContainer';
 import PostModalPage from './PostModalPage';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { useUserContext } from '../../context/UserContext';
+import { usePostContext } from '../../context/PostContext';
 
 const UserPage = (props) => {
     const { openModal } = props;
@@ -13,18 +15,21 @@ const UserPage = (props) => {
     const { userName } = params;
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
+    const { getUserByUserNameApi } = useUserContext();
+    const { getPostByUserIdApi } = usePostContext();
 
     useEffect(() => {
-        fetch(`http://localhost:8081/users?userName=${userName}`)
+        getUserByUserNameApi(userName)
             .then((res) => res.json())
             .then((userData) => {
                 setUser(userData.users[0]);
                 getPosts(userData.users[0].userId);
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userName]);
 
     const getPosts = (userId) => {
-        fetch(`http://localhost:8082/posts/user/${userId}`)
+        getPostByUserIdApi(userId)
             .then((res) => res.json())
             .then((postsData) => {
                 setPosts(postsData.posts);

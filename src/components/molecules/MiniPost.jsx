@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
 
 const MiniPost = (props) => {
+    const { getCommentsByPostIdApi } = useUserContext();
     const navigate = useNavigate();
     const { post, user } = props;
     const [showCover, setShowCover] = useState(false);
     const [numComments, setNumComments] = useState(0);
 
     const handleMouseOver = () => {
-        fetch(`http://localhost:8083/comments/${post.postId}`)
+        getCommentsByPostIdApi(post.postId)
             .then((res) => res.json())
             .then((data) => {
                 setNumComments(data.fullComments.length);
