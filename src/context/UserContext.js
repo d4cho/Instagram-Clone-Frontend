@@ -8,7 +8,7 @@ export const useUserContext = () => {
 };
 
 export const UserContextProvider = ({ children }) => {
-    const { user } = useAuth0();
+    const { user, getAccessTokenSilently } = useAuth0();
     const [loggedInUser, setLoggedInUser] = useState({
         userId: 2,
         userName: 'd4cho',
@@ -16,6 +16,8 @@ export const UserContextProvider = ({ children }) => {
         image: 'www.test.ca',
     });
     const [users, setUsers] = useState([]);
+    const [accessToken, setAccessToken] = useState(null);
+    console.log(accessToken);
 
     useEffect(() => {
         if (user) {
@@ -30,12 +32,28 @@ export const UserContextProvider = ({ children }) => {
             setLoggedInUser(newUser);
             console.log(newUser);
         }
-    }, [user]);
+
+        const getAccessToken = async () => {
+            try {
+                const newAccessToken = await getAccessTokenSilently();
+                setAccessToken(newAccessToken);
+            } catch (e) {
+                console.log('error:', e.message);
+            }
+        };
+        getAccessToken();
+    }, [getAccessTokenSilently, user]);
 
     // API CALLS
 
     const getAllUsersApi = () => {
-        fetch('http://localhost:8081/users')
+        fetch('http://localhost:8081/users/private', {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+            }),
+        })
             .then((res) => res.json())
             .then((userData) => {
                 setUsers(userData.users);
@@ -43,11 +61,23 @@ export const UserContextProvider = ({ children }) => {
     };
 
     const getUserByUserNameApi = (searchVal) => {
-        return fetch(`http://localhost:8081/users?userName=${searchVal}`);
+        return fetch(`http://localhost:8081/users/private?userName=${searchVal}`, {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+            }),
+        });
     };
 
     const getUserByUserIdApi = (userId) => {
-        return fetch(`http://localhost:8081/users/${userId}`);
+        return fetch(`http://localhost:8081/users/private/${userId}`, {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+            }),
+        });
     };
 
     const addCommentApi = (data) => {
@@ -76,6 +106,7 @@ export const UserContextProvider = ({ children }) => {
                 getCommentsByPostIdApi,
                 getUserByUserNameApi,
                 getUserByUserIdApi,
+                accessToken,
             }}
         >
             {children}

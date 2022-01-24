@@ -15,12 +15,14 @@ const useStyles = makeStyles({
 
 const UsersListContainer = () => {
     const classes = useStyles();
-    const { users, getAllUsersApi } = useUserContext();
+    const { users, getAllUsersApi, accessToken } = useUserContext();
 
     useEffect(() => {
-        getAllUsersApi();
+        if (accessToken) {
+            getAllUsersApi();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [accessToken]);
 
     return (
         <div className={classes.root}>
