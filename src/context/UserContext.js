@@ -83,15 +83,22 @@ export const UserContextProvider = ({ children }) => {
     const addCommentApi = (data) => {
         return fetch('http://localhost:8083/comments', {
             method: 'POST',
-            headers: {
+            headers: new Headers({
+                Authorization: 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
-            },
+            }),
             body: JSON.stringify(data),
         });
     };
 
     const getCommentsByPostIdApi = (postId) => {
-        return fetch(`http://localhost:8083/comments/${postId}`);
+        return fetch(`http://localhost:8083/comments/${postId}`, {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: 'Bearer ' + accessToken,
+                'Content-Type': 'application/json',
+            }),
+        });
     };
 
     return (

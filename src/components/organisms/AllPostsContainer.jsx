@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { usePostContext } from '../../context/PostContext';
+import { useUserContext } from '../../context/UserContext';
 import LandingPost from '../molecules/LandingPost';
 import { makeStyles } from '@mui/styles';
 
@@ -14,13 +15,16 @@ const useStyles = makeStyles({
 });
 
 const AllPostsContainer = () => {
+    const { accessToken } = useUserContext();
     const classes = useStyles();
     const { allPosts, getAllPostsApi } = usePostContext();
 
     useEffect(() => {
-        getAllPostsApi();
+        if (accessToken) {
+            getAllPostsApi();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [accessToken]);
 
     return allPosts.reverse().map((post) => (
         <div key={post.postId} className={classes.root}>
