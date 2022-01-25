@@ -34,5 +34,7 @@ const LandingPage = (props) => {
 };
 
 export default withAuthenticationRequired(LandingPage, {
-    onRedirecting: () => <div style={{ marginTop: '100px', fontSize: '50px' }}>Loading...</div>,
+    onRedirecting: () => (
+        <div style={{ marginTop: '100px', fontSize: '50px' }}>Redirecting to Login Page...</div>
+    ),
 });

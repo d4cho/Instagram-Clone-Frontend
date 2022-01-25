@@ -17,9 +17,19 @@ export const UserContextProvider = ({ children }) => {
     });
     const [users, setUsers] = useState([]);
     const [accessToken, setAccessToken] = useState(null);
-    console.log(accessToken);
+    console.log('user: ', user);
+    console.log('accessToken: ', accessToken);
 
     useEffect(() => {
+        const getAccessToken = async () => {
+            try {
+                const newAccessToken = await getAccessTokenSilently();
+                setAccessToken(newAccessToken);
+            } catch (e) {
+                console.log('error:', e.message);
+            }
+        };
+
         if (user) {
             const { sub } = user;
             const userId = sub.slice(sub.indexOf('|') + 1, sub.length);
@@ -30,18 +40,8 @@ export const UserContextProvider = ({ children }) => {
                 image: user.picture || 'www.image.ca',
             };
             setLoggedInUser(newUser);
-            console.log(newUser);
+            getAccessToken();
         }
-
-        const getAccessToken = async () => {
-            try {
-                const newAccessToken = await getAccessTokenSilently();
-                setAccessToken(newAccessToken);
-            } catch (e) {
-                console.log('error:', e.message);
-            }
-        };
-        getAccessToken();
     }, [getAccessTokenSilently, user]);
 
     // API CALLS
