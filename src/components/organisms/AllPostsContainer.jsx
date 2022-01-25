@@ -3,6 +3,7 @@ import { usePostContext } from '../../context/PostContext';
 import { useUserContext } from '../../context/UserContext';
 import LandingPost from '../molecules/LandingPost';
 import { makeStyles } from '@mui/styles';
+import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles({
     root: {
@@ -28,13 +29,15 @@ const AllPostsContainer = () => {
     }, [accessToken]);
 
     useEffect(() => {
-        if (allPosts.length > 0) {
+        if (allPosts && allPosts.length > 0) {
             setIsLoading(false);
         }
     }, [allPosts]);
 
     if (isLoading === true) {
-        return <div className={classes.root}>Loading Posts...</div>;
+        return (
+            <Skeleton className={classes.skeleton} variant='rectangular' width={370} height={607} />
+        );
     }
 
     return allPosts.reverse().map((post) => (

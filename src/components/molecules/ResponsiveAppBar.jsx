@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApplicationContext } from '../../context/ApplicationContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useUserContext } from '../../context/UserContext';
+import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles({
     searchResults: {
@@ -173,10 +174,14 @@ const ResponsiveAppBar = () => {
                             <FavoriteBorderIcon />
                         </IconButton>
                         <IconButton onClick={handleOpenSettings}>
-                            <Avatar
-                                alt={`${loggedInUser.userName}`}
-                                src={`${loggedInUser.image}`}
-                            />
+                            {loggedInUser.userId ? (
+                                <Avatar
+                                    alt={`${loggedInUser.userName}`}
+                                    src={`${loggedInUser.image}`}
+                                />
+                            ) : (
+                                <Skeleton variant='circular' width={40} height={40} />
+                            )}
                         </IconButton>
 
                         <Menu

@@ -54,7 +54,7 @@ const CreateNewPost = () => {
         boxShadow: 24,
         // p: 1,
         width: files.length > 0 ? 1011 : 671,
-        height: 714,
+        height: 614,
     };
 
     const handleClose = () => {

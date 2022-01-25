@@ -10,10 +10,10 @@ export const useUserContext = () => {
 export const UserContextProvider = ({ children }) => {
     const { user, getAccessTokenSilently } = useAuth0();
     const [loggedInUser, setLoggedInUser] = useState({
-        userId: 2,
-        userName: 'd4cho',
-        name: 'dan cho',
-        image: 'www.test.ca',
+        userId: null,
+        userName: '',
+        name: '',
+        image: '',
     });
     const [users, setUsers] = useState([]);
     const [accessToken, setAccessToken] = useState(null);
